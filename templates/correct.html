@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}CORRECT{% endblock %}
+
+
+{% block content %}
+<div id="answer"></div>
+<div id="explanation"></div>
+<div id="reward"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const question = urlParams.get('question');
+
+const explanations = {{explanations}};
+const answer = explanations.find(item => item.id === question)
+document.documentElement.style.setProperty('--bkgnd_img', `url(../assets/${answer.image})`);
+
+document.getElementById('answer').innerHTML = answer.text;
+document.getElementById('explanation').innerHTML = answer.explanation;
+document.getElementById('reward').innerHTML = `<h2>Your reward is the letter: ${answer.reward}</h2>`;
+</script>
+{% endblock %}

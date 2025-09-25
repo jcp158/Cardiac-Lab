@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}INCORRECT{% endblock %}
+
+
+{% block content %}
+<div id="answer"></div>
+<div id="explanation"></div>
+<button id="nav-button" class="hint-btn" style="margin-top: 15px; margin-left: 80px;" onclick="tryagain()">Try Again?</button>
+{% endblock %}
+
+{% block script %}
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const question = urlParams.get('question');
+const picked = urlParams.get('answer');
+
+const explanations = {{explanations}};
+const answers = explanations.find(list => list.id === question)
+document.documentElement.style.setProperty('--bkgnd_img', `url(../assets/${answers.image})`);
+const answer = answers.incorrect.find(item => item.letter === picked)
+
+document.getElementById('answer').innerHTML = answer.text;
+document.getElementById('explanation').innerHTML = answer.explanation;
+
+function tryagain() {
+    window.location.href = `${question}.html`;
+    }
+</script>
+{% endblock %}

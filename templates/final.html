@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}CARDIAC{% endblock %}
+
+{% block content %}
+<div class="container" class="body">
+        <h2>Enter Your 5-Letter Word</h2>
+        
+        <div class="letter-container">
+            <input type="text" class="letter-box" maxlength="1" id="box-0">
+            <input type="text" class="letter-box" maxlength="1" id="box-1">
+            <input type="text" class="letter-box" maxlength="1" id="box-2">
+            <input type="text" class="letter-box" maxlength="1" id="box-3">
+            <input type="text" class="letter-box" maxlength="1" id="box-4">
+        </div>
+        
+        <button class="submit-btn" onclick="submitWord()">Submit</button>
+        
+        <div class="result" id="result" style="display: none;">
+            
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.documentElement.style.setProperty('--bkgnd_img', 'url(../assets/final.webp)');
+const boxes = document.querySelectorAll('.letter-box');
+        
+        // Auto-advance to next box
+        boxes.forEach((box, index) => {
+            box.addEventListener('input', function(e) {
+                const value = e.target.value.toUpperCase();
+                e.target.value = value;
+                
+                // Add filled class
+                if (value) {
+                    e.target.classList.add('filled');
+                    // Move to next box
+                    if (index < boxes.length - 1) {
+                        boxes[index + 1].focus();
+                    }
+                } else {
+                    e.target.classList.remove('filled');
+                }
+            });
+            
+            // Handle backspace
+            box.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    boxes[index - 1].focus();
+                }
+                
+                // Only allow letters
+                if (!/[a-zA-Z]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        });
+        
+        function submitWord() {
+            const word = Array.from(boxes).map(box => box.value).join('');
+            const resultDiv = document.getElementById('result');
+            
+            if (word === 'WAVES') {
+                resultDiv.innerHTML = '<h2>Congratulations! You\'ve recovered the Heart of Te Fiti!!!</h2><br><img src="../assets/Heart.webp"></img>'
+                resultDiv.style.display = 'block';
+            } else {
+                resultDiv.innerHTML = '<span style="color: red;">Incorrect!!!</span>';
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Focus first box on load
+        boxes[0].focus();
+</script>
+{% endblock %}

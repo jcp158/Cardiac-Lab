@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="..\static\stylesheet.css">
+    </head>
+    <body>
+        <div class="Banner">
+            {% block title %}{% endblock %}
+        </div>
+        <div id="body" class="body">
+        {% block content %}{% endblock %}
+        </div>
+    </body>
+    {% block script %}{% endblock %}
+</html>

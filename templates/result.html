@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+<p>Processing...</p>
+{% endblock %}
+
+{% block script %}
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const question = urlParams.get('question');
+    const answer = urlParams.get('answer');
+
+    const correctAnswers = {{correctAnswers}};
+
+    // Check if answer is correct
+    if (answer === correctAnswers[question]) {
+        // Redirect to correct page with question info
+        window.location.replace(`correct.html?question=${question}`);
+    } else {
+        // Redirect to incorrect page with question info
+        window.location.replace(`incorrect.html?question=${question}&answer=${answer}`);
+    }
+</script>
+{% endblock %}

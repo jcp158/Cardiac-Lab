@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}CARDIAC{% endblock %}
+
+{% block content %}
+<h2>{{ question.question }}</h2>
+{% for answer in question.answers %}
+<p> {{answer.letter}})&ensp;&ensp;<span data-href="result.html?question={{ question.id }}&answer={{ answer.letter }}">{{ answer.text }}</span><br>
+    {% endfor %}
+<button id="hint-button" class="hint-btn" style="display: none; margin-top: 15px;" onclick="showHint()">
+Need a hint?
+</button>
+<div id="hint-content" class="hint-content" style="display: none;">
+    <p id="hint-text">{{question.hint}}</p>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+var aTags = document.querySelectorAll('span[data-href]');
+document.documentElement.style.setProperty('--bkgnd_img', 'url(../assets/{{question.image}})');
+
+for(var i = 0; i < aTags.length; i++){
+	var aTag = aTags[i];
+	aTag.addEventListener('click', function(e){
+		var ele = e.target;
+		window.location.replace(ele.getAttribute('data-href'));
+	});
+}
+
+const hintDelay = 30000;
+
+setTimeout(() => {
+    const hintbutton = document.getElementById('hint-button');
+    hintbutton.style.display = 'block';
+}, hintDelay);
+
+function showHint() {
+    document.getElementById('hint-content').style.display = 'block';
+    document.getElementById('hint-button').style.display = 'none';
+}
+</script>
+{% endblock %}
