@@ -1,7 +1,16 @@
 from jinja2 import Environment, FileSystemLoader
 import os
+import shutil
 
-os.makedirs('dist', exist_ok=True)
+if os.path.exists('dist'):
+    shutil.rmtree('dist')
+os.makedirs('dist')
+
+# Copy stylesheets
+shutil.copytree('static', 'dist/static')  # or whatever your CSS folder is called
+
+# Copy other assets
+shutil.copytree('assets', 'dist/assets')
 
 env = Environment(loader=FileSystemLoader('templates'))
 
