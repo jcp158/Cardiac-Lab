@@ -1,6 +1,8 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 
+os.makedirs('dist', exist_ok=True)
+
 env = Environment(loader=FileSystemLoader('templates'))
 
 questions = [
