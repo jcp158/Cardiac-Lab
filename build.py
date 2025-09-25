@@ -83,7 +83,7 @@ questions = [
         'correct': 'A',
         'hint': 'Think about what kind of medicine would help a weak heart pump more forcefully.',
         'reward': 'W',
-        'image': 'Heihei.webp'
+        'image': 'heihei.webp'
     },
 ]
 
