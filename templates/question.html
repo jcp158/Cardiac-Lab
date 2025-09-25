@@ -18,7 +18,7 @@ Need a hint?
 {% block script %}
 <script>
 var aTags = document.querySelectorAll('span[data-href]');
-document.documentElement.style.setProperty('--bkgnd_img', 'url(../assets/{{question.image}})');
+document.documentElement.style.setProperty('--bkgnd_img', 'url(./assets/{{question.image}})');
 
 for(var i = 0; i < aTags.length; i++){
 	var aTag = aTags[i];

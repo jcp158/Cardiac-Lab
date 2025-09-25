@@ -17,7 +17,7 @@ const picked = urlParams.get('answer');
 
 const explanations = {{explanations}};
 const answers = explanations.find(list => list.id === question)
-document.documentElement.style.setProperty('--bkgnd_img', `url(../assets/${answers.image})`);
+document.documentElement.style.setProperty('--bkgnd_img', `url(./assets/${answers.image})`);
 const answer = answers.incorrect.find(item => item.letter === picked)
 
 document.getElementById('answer').innerHTML = answer.text;
