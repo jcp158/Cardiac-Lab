@@ -16,7 +16,7 @@ const question = urlParams.get('question');
 
 const explanations = {{explanations}};
 const answer = explanations.find(item => item.id === question)
-document.documentElement.style.setProperty('--bkgnd_img', `url(./assets/${answer.image})`);
+document.documentElement.style.setProperty('--bkgnd_img', `url(../assets/${answer.image})`);
 
 document.getElementById('answer').innerHTML = answer.text;
 document.getElementById('explanation').innerHTML = answer.explanation;
